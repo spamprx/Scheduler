@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).Take a look at the website at [Social Media Scheduler](https://scheduler-bay-alpha.vercel.app/)
 
 ## Available Scripts
 
