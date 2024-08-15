@@ -12,7 +12,8 @@ import PostList from './components/PostList';
 import PostForm from './components/PostForm';
 import Header from './components/Header';
 import Login from './components/Login';
-import Signup from './components/Signup';  // Import the new Signup component
+import Signup from './components/Signup';
+import Profile from './components/Profile';  // Add this line
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './globalStyles.css';
 
@@ -29,9 +30,10 @@ function AppContent() {
         <Paper elevation={3} className="content-paper">
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />  {/* Add the new Signup route */}
+            <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<PrivateRoute><PostList /></PrivateRoute>} />
             <Route path="/schedule" element={<PrivateRoute><PostForm /></PrivateRoute>} />
+            <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           </Routes>
         </Paper>
       </Container>

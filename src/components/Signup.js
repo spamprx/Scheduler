@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { TextField, Button, Typography, Box, Link, Paper } from '@mui/material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import GoogleIcon from '@mui/icons-material/Google';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const { signup } = useAuth();
+  const { signup, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,7 +23,18 @@ const Signup = () => {
       await signup(email, password);
       navigate('/');
     } catch (error) {
-      setError('Failed to create an account');
+      console.error("Signup error:", error.code, error.message);
+      setError(`Failed to create an account: ${error.message}`);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      navigate('/');
+    } catch (error) {
+      console.error("Google Sign-In Error:", error.code, error.message);
+      setError('Failed to sign in with Google');
     }
   };
 
@@ -71,6 +83,15 @@ const Signup = () => {
           style={{ backgroundColor: '#7c4dff', color: 'white' }}
         >
           SIGN UP
+        </Button>
+        <Button 
+          fullWidth 
+          variant="outlined" 
+          startIcon={<GoogleIcon />}
+          onClick={handleGoogleSignIn}
+          sx={{ mt: 2, mb: 2 }}
+        >
+          Sign up with Google
         </Button>
         <Box sx={{ mt: 2, textAlign: 'center' }}>
           <Typography variant="body2">

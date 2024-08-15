@@ -29,6 +29,9 @@ function Header() {
             <Button color="inherit" component={Link} to="/schedule" aria-label="Schedule Post" style={{ color: 'white' }}>
               Schedule Post
             </Button>
+            <Button color="inherit" component={Link} to="/profile" aria-label="Profile" style={{ color: 'white' }}>
+              Profile
+            </Button>
             <Button color="inherit" onClick={handleLogout} aria-label="Logout" style={{ color: 'white' }}>
               Logout
             </Button>

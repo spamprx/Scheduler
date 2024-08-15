@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 import { TextField, Button, Typography, Box, Link, Paper } from '@mui/material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import GoogleIcon from '@mui/icons-material/Google';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { login } = useAuth();
+  const { login, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,7 +19,18 @@ const Login = () => {
       await login(email, password);
       navigate('/');
     } catch (error) {
+      console.error("Login error:", error.code, error.message);
       setError('Failed to log in');
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      navigate('/');
+    } catch (error) {
+      console.error("Google Sign-In Error:", error.code, error.message);
+      setError('Failed to sign in with Google');
     }
   };
 
@@ -57,6 +69,15 @@ const Login = () => {
           style={{ backgroundColor: '#7c4dff', color: 'white' }}
         >
           LOGIN
+        </Button>
+        <Button 
+          fullWidth 
+          variant="outlined" 
+          startIcon={<GoogleIcon />}
+          onClick={handleGoogleSignIn}
+          sx={{ mt: 2, mb: 2 }}
+        >
+          Sign in with Google
         </Button>
         <Box sx={{ mt: 2, textAlign: 'center' }}>
           <Typography variant="body2">
